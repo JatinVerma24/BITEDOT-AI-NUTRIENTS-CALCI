@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bite. Tracker — Scan & Log Your Nutrition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body class="app-body">
+
+  <!-- Animated Background Blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="app-nav">
+    <div class="app-nav-container">
+      <a href="index.html" class="nav-logo">bite<span>.</span></a>
+      <div class="nav-actions">
+        <span class="user-greeting">Hi, Guest 👋</span>
+        <a href="index.html" class="btn-back">Home</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="app-container">
+    
+    <!-- LEFT PANEL: DASHBOARD & DIARY -->
+    <section class="app-panel dashboard-panel">
+      <div class="panel-header">
+        <div class="header-title-row">
+          <h2>Your Progress</h2>
+          <div class="streak-badge" id="streakBadge" title="Daily logging streak!">🔥 3 Day Streak</div>
+        </div>
+        <span class="date-badge" id="currentDate">Today</span>
+      </div>
+
+      <!-- Calorie & Goal Stats -->
+      <div class="progress-card">
+        <div class="progress-main">
+          <!-- Big SVG Calorie Progress Circle -->
+          <div class="svg-ring-container">
+            <svg viewBox="0 0 160 160" class="progress-svg">
+              <circle cx="80" cy="80" r="70" class="progress-ring-bg"></circle>
+              <circle cx="80" cy="80" r="70" class="progress-ring-fill" id="dashboardRingFill"></circle>
+            </svg>
+            <div class="ring-content">
+              <span class="ring-value" id="calRemainingVal">2,100</span>
+              <span class="ring-label">kcal left</span>
+            </div>
+          </div>
+
+          <div class="stats-text">
+            <div class="text-stat-row">
+              <span class="stat-lbl">Goal:</span>
+              <span class="stat-val font-display">2,100 kcal</span>
+            </div>
+            <div class="text-stat-row">
+              <span class="stat-lbl">Logged:</span>
+              <span class="stat-val font-display color-green" id="calLoggedVal">0 kcal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Macro breakdown sliders -->
+        <div class="macro-progress-list">
+          <div class="macro-prog-item">
+            <div class="macro-prog-header">
+              <span>Protein</span>
+              <span class="macro-prog-numbers"><strong id="proteinLogged">0g</strong> / 150g</span>
+            </div>
+            <div class="macro-prog-bar-bg">
+              <div class="macro-prog-bar protein-bar" id="proteinBar" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="macro-prog-item">
+            <div class="macro-prog-header">
+              <span>Carbs</span>
+              <span class="macro-prog-numbers"><strong id="carbsLogged">0g</strong> / 250g</span>
+            </div>
+            <div class="macro-prog-bar-bg">
+              <div class="macro-prog-bar carbs-bar" id="carbsBar" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="macro-prog-item">
+            <div class="macro-prog-header">
+              <span>Fats</span>
+              <span class="macro-prog-numbers"><strong id="fatsLogged">0g</strong> / 70g</span>
+            </div>
+            <div class="macro-prog-bar-bg">
+              <div class="macro-prog-bar fats-bar" id="fatsBar" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meal Log / History -->
+      <div class="meal-log-container">
+        <h3>Food Diary</h3>
+        <div class="diary-list" id="diaryList">
+          <div class="diary-empty-state" id="diaryEmptyState">
+            <span class="empty-icon">🥗</span>
+            <p>Your food diary is empty. Scan a barcode or upload a food photo to log your first meal!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: SCANNER & FILE UPLOAD -->
+    <section class="app-panel scanner-panel">
+      
+      <!-- TAB SELECTORS -->
+      <div class="tab-selectors">
+        <button class="tab-btn active" id="tabScanner">📷 Live Scanner</button>
+        <button class="tab-btn" id="tabUpload">📤 Upload Image</button>
+      </div>
+
+      <!-- SCANNER SCREEN -->
+      <div class="tab-content" id="scannerView">
+        <div class="camera-container">
+          <!-- Feed -->
+          <video id="cameraStream" autoplay playsinline class="video-feed"></video>
+          
+          <!-- Scanner overlay layout -->
+          <div class="scanner-overlay">
+            <div class="scanner-frame">
+              <div class="corner top-left"></div>
+              <div class="corner top-right"></div>
+              <div class="corner bottom-left"></div>
+              <div class="corner bottom-right"></div>
+              <!-- Laser line -->
+              <div class="scanner-laser"></div>
+            </div>
+            
+            <!-- Shutter animation flash overlay -->
+            <div class="camera-flash" id="cameraFlash"></div>
+            
+            <!-- Scanning Loader Overlay -->
+            <div class="scanner-loader-overlay" id="scannerLoader">
+              <div class="spinner"></div>
+              <span>Analyzing barcode...</span>
+            </div>
+          </div>
+
+          <!-- Permission / Offline Banner -->
+          <div class="camera-error-banner" id="cameraErrorBanner" style="display: none;">
+            <div class="err-icon">🔒</div>
+            <div class="err-msg-block">
+              <span class="err-msg">Camera Access Blocked</span>
+              <p class="err-sub">Browser settings or another app (like Zoom) is blocking the camera. Please allow camera access in the URL bar (lock icon) and try again.</p>
+            </div>
+            <button class="btn-sec btn-sm mt-1" id="btnRetryCamera">Retry Camera</button>
+          </div>
+        </div>
+
+        <div class="camera-controls">
+          <button class="btn-camera" id="btnToggleCamera" title="Switch Camera">
+            🔄 Switch Facing
+          </button>
+          <button class="btn-primary btn-capture" id="btnCaptureFrame">
+            📸 Capture & Scan
+          </button>
+          <button class="btn-sec" id="btnToggleStream">
+            ⏸️ Stop Camera
+          </button>
+        </div>
+      </div>
+
+      <!-- UPLOAD FILE SCREEN -->
+      <div class="tab-content" id="uploadView" style="display: none;">
+        <div class="upload-dropzone" id="dropzone">
+          <input type="file" id="fileInput" accept="image/*" style="display: none;">
+          <div class="dropzone-prompt" id="dropzonePrompt">
+            <span class="upload-icon">📁</span>
+            <h4>Drag & drop food image here</h4>
+            <p>or click to browse your files</p>
+            <span class="upload-limit">Supports JPEG, PNG, HEIC up to 10MB</span>
+          </div>
+
+          <!-- Upload preview container -->
+          <div class="upload-preview-container" id="previewContainer" style="display: none;">
+            <img src="" id="uploadImgPreview" alt="Upload Preview">
+            <div class="preview-overlay">
+              <button class="btn-remove-preview" id="btnRemovePreview" title="Remove image">×</button>
+            </div>
+          </div>
+
+          <!-- Analyzer overlay loader -->
+          <div class="scanner-loader-overlay" id="uploadLoader">
+            <div class="spinner"></div>
+            <span>Analyzing nutritional values...</span>
+          </div>
+        </div>
+
+        <div class="upload-controls">
+          <button class="btn-primary" id="btnAnalyzeUpload" disabled>
+            ⚡ Analyze Photo
+          </button>
+        </div>
+      </div>
+
+      <!-- SCANNER DEMO SUGGESTIONS -->
+      <div class="demo-suggestions-card">
+        <h4>💡 Test Barcode Simulation</h4>
+        <p>No packaged food nearby? Pick a sample barcode to test the detection:</p>
+        <div class="demo-chips">
+          <button class="demo-chip" data-barcode="0012000000133">🥤 Pepsi Can</button>
+          <button class="demo-chip" data-barcode="4008400401829">🍫 Hazelnut Chocolate</button>
+          <button class="demo-chip" data-barcode="030000010204">🥣 Quaker Oats</button>
+          <button class="demo-chip" data-barcode="021000612239">🧀 Cheddar Cheese</button>
+        </div>
+      </div>
+
+      <!-- SCAN RESULTS DRAWER / DIALOG -->
+      <div class="results-card" id="resultsCard" style="display: none;">
+        <div class="results-header">
+          <span class="results-tag">Food Found</span>
+          <button class="btn-close-results" id="btnCloseResults">×</button>
+        </div>
+        <div class="results-body">
+          <div class="food-identity">
+            <span class="food-emoji" id="resFoodEmoji">🍎</span>
+            <div>
+              <h4 id="resFoodName">Apple</h4>
+              <p id="resFoodCategory">Fruits</p>
+            </div>
+          </div>
+          <div class="results-macros-grid">
+            <div class="res-macro-item">
+              <span class="res-macro-title">Calories</span>
+              <span class="res-macro-val color-green" id="resFoodCalories">95 kcal</span>
+            </div>
+            <div class="res-macro-item">
+              <span class="res-macro-title">Protein</span>
+              <span class="res-macro-val color-cyan" id="resFoodProtein">0.5g</span>
+            </div>
+            <div class="res-macro-item">
+              <span class="res-macro-title">Carbs</span>
+              <span class="res-macro-val color-purple" id="resFoodCarbs">25g</span>
+            </div>
+            <div class="res-macro-item">
+              <span class="res-macro-title">Fats</span>
+              <span class="res-macro-val color-orange" id="resFoodFats">0.3g</span>
+            </div>
+          </div>
+          
+          <div class="serving-selector">
+            <label for="servingCount">Servings:</label>
+            <input type="number" id="servingCount" min="0.25" max="10" step="0.25" value="1.0">
+            <span class="serving-size" id="resFoodServingSize">1 medium (182g)</span>
+          </div>
+
+          <button class="btn-primary w-full" id="btnAddFoodToLog">
+            Log This Food
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>© 2026 bite. — Complete scan & track system.</p>
+  </footer>
+
+  <!-- WebRTC and Scanner Code -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>

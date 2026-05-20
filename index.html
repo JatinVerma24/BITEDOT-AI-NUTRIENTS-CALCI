@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bite. — Scan. Log. Own your nutrition.</title>
+  <meta name="description" content="bite. is the fastest nutrition tracker. Scan barcodes, search foods, and auto-log your calories, protein, and fats in seconds." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Animated Background Blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">bite<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#how-it-works" class="nav-link">How it Works</a></li>
+        <li><a href="#macros" class="nav-link">Macros</a></li>
+        <li><a href="#cta" class="nav-link">Get Started</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="app.html" class="btn-nav">Launch App</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it Works</a>
+      <a href="#macros">Macros</a>
+      <a href="#cta">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        🚀 Smart Nutrition Tracking, Reimagined
+      </div>
+      <h1 class="hero-title">
+        Track every <br />
+        <span class="gradient-text">bite.</span> you take
+      </h1>
+      <p class="hero-subtitle">
+        Scan a barcode. Type a meal. That's it. <br />
+        bite. auto-logs your exact calories, protein & fats — instantly.
+      </p>
+      <div class="hero-cta">
+        <a href="app.html" class="btn-primary" id="heroCtaBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Start Tracking Free
+        </a>
+        <a href="#how-it-works" class="btn-ghost">
+          See How It Works
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number" data-target="2000000">0</span>
+          <span class="stat-label">Foods in DB</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="98">0</span><span class="stat-suffix">%</span>
+          <span class="stat-label">Accuracy Rate</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="3">0</span><span class="stat-suffix">s</span>
+          <span class="stat-label">Avg Log Time</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Mockup / Visual -->
+    <div class="hero-visual">
+      <div class="phone-mockup">
+        <div class="phone-screen">
+          <div class="app-header">
+            <span class="app-greeting">Good morning! 👋</span>
+            <span class="app-date">Today's Log</span>
+          </div>
+          <div class="calorie-ring-wrap">
+            <div class="calorie-ring">
+              <svg viewBox="0 0 120 120" class="ring-svg">
+                <circle cx="60" cy="60" r="50" class="ring-bg"/>
+                <circle cx="60" cy="60" r="50" class="ring-fill" id="ringFill"/>
+              </svg>
+              <div class="ring-center">
+                <span class="ring-cal">1,420</span>
+                <span class="ring-label">kcal left</span>
+              </div>
+            </div>
+          </div>
+          <div class="macro-bars">
+            <div class="macro-row">
+              <span class="macro-name">Protein</span>
+              <div class="macro-bar-wrap"><div class="macro-bar protein-bar" style="width:72%"></div></div>
+              <span class="macro-val">86g</span>
+            </div>
+            <div class="macro-row">
+              <span class="macro-name">Carbs</span>
+              <div class="macro-bar-wrap"><div class="macro-bar carbs-bar" style="width:48%"></div></div>
+              <span class="macro-val">145g</span>
+            </div>
+            <div class="macro-row">
+              <span class="macro-name">Fats</span>
+              <div class="macro-bar-wrap"><div class="macro-bar fats-bar" style="width:35%"></div></div>
+              <span class="macro-val">32g</span>
+            </div>
+          </div>
+          <div class="scan-btn-mock">
+            <div class="scan-icon">⊕</div>
+            <span>Scan or Search Food</span>
+          </div>
+          <div class="recent-meals">
+            <div class="meal-chip">
+              <span class="meal-emoji">🥗</span>
+              <div>
+                <span class="meal-name">Caesar Salad</span>
+                <span class="meal-cal">320 kcal</span>
+              </div>
+            </div>
+            <div class="meal-chip">
+              <span class="meal-emoji">🍌</span>
+              <div>
+                <span class="meal-name">Banana</span>
+                <span class="meal-cal">105 kcal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-glow"></div>
+      </div>
+      <!-- Floating cards -->
+      <div class="float-card float-card-1">
+        <span class="fc-icon">🔥</span>
+        <div>
+          <span class="fc-val">2,100</span>
+          <span class="fc-label">Cal Goal</span>
+        </div>
+      </div>
+      <div class="float-card float-card-2">
+        <span class="fc-icon">✅</span>
+        <div>
+          <span class="fc-val">Logged!</span>
+          <span class="fc-label">Chicken Rice</span>
+        </div>
+      </div>
+      <div class="float-card float-card-3">
+        <span class="fc-icon">📷</span>
+        <div>
+          <span class="fc-val">Scanned</span>
+          <span class="fc-label">Barcode found</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HOW IT WORKS ==================== -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Simple Process</span>
+        <h2 class="section-title">Three steps. Zero excuses.</h2>
+        <p class="section-subtitle">Logging nutrition has never been this fast. No counting, no calculators, no frustration.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card" data-aos="fade-up" data-delay="0">
+          <div class="step-number">01</div>
+          <div class="step-icon-wrap">
+            <div class="step-icon">📷</div>
+          </div>
+          <h3>Scan or Type</h3>
+          <p>Point your camera at any barcode or simply type what you ate. Our smart search handles everything.</p>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" data-aos="fade-up" data-delay="150">
+          <div class="step-number">02</div>
+          <div class="step-icon-wrap step-icon-green">
+            <div class="step-icon">⚡</div>
+          </div>
+          <h3>Instant Lookup</h3>
+          <p>We query 2M+ food items from verified nutrition databases — including branded & restaurant foods.</p>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card" data-aos="fade-up" data-delay="300">
+          <div class="step-number">03</div>
+          <div class="step-icon-wrap step-icon-purple">
+            <div class="step-icon">✅</div>
+          </div>
+          <h3>Auto Logged</h3>
+          <p>Calories, protein, carbs, and fats are automatically recorded to your daily diary. Done.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FEATURES ==================== -->
+  <section class="features" id="features">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Features</span>
+        <h2 class="section-title">Everything you need.<br/>Nothing you don't.</h2>
+        <p class="section-subtitle">Designed for people who actually want to reach their goals — not just download another app.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card feature-large" data-aos="fade-up">
+          <div class="feat-icon">📷</div>
+          <h3>Barcode Scanner</h3>
+          <p>Instantly scan any packaged food. Our scanner works with 2M+ products from global databases including Open Food Facts and USDA.</p>
+          <div class="feat-tag">Most Used</div>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-delay="100">
+          <div class="feat-icon">🔎</div>
+          <h3>Smart Food Search</h3>
+          <p>Type any food name and get instant results with accurate macros — even restaurant meals.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-delay="150">
+          <div class="feat-icon">🔥</div>
+          <h3>Calorie Goals</h3>
+          <p>Set a custom daily calorie target. See exactly how much room you have left in real-time.</p>
+        </div>
+        <div class="feature-card feature-large-2" data-aos="fade-up" data-delay="200">
+          <div class="feat-icon">💪</div>
+          <h3>Macro Breakdown</h3>
+          <p>Protein, Carbs, Fats — tracked per meal and per day. Hit your macros like a pro with our visual breakdown charts.</p>
+          <div class="mini-macros">
+            <div class="mini-macro"><span style="color:#22d3ee">P</span> 86g</div>
+            <div class="mini-macro"><span style="color:#a78bfa">C</span> 145g</div>
+            <div class="mini-macro"><span style="color:#fb923c">F</span> 32g</div>
+          </div>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-delay="250">
+          <div class="feat-icon">📊</div>
+          <h3>Weekly Trends</h3>
+          <p>Visualize your nutrition over time. Spot patterns and stay consistent.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-delay="300">
+          <div class="feat-icon">🍽️</div>
+          <h3>Meal Diary</h3>
+          <p>Organize logs into Breakfast, Lunch, Dinner & Snacks. Every meal accounted for.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MACRO SECTION ==================== -->
+  <section class="macro-section" id="macros">
+    <div class="section-container">
+      <div class="macro-split">
+        <div class="macro-left" data-aos="fade-right">
+          <span class="section-tag">Smart Tracking</span>
+          <h2 class="section-title">Your macros.<br/>Crystal clear.</h2>
+          <p class="macro-desc">Stop guessing. bite. gives you a real-time breakdown of every macro — protein, carbs, fats — so you always know where you stand.</p>
+          <div class="macro-list">
+            <div class="macro-item">
+              <div class="macro-dot dot-protein"></div>
+              <div class="macro-info">
+                <span class="macro-title">Protein</span>
+                <span class="macro-description">Muscle building & recovery</span>
+              </div>
+              <span class="macro-pct">30%</span>
+            </div>
+            <div class="macro-item">
+              <div class="macro-dot dot-carbs"></div>
+              <div class="macro-info">
+                <span class="macro-title">Carbohydrates</span>
+                <span class="macro-description">Energy & performance</span>
+              </div>
+              <span class="macro-pct">50%</span>
+            </div>
+            <div class="macro-item">
+              <div class="macro-dot dot-fats"></div>
+              <div class="macro-info">
+                <span class="macro-title">Fats</span>
+                <span class="macro-description">Hormones & brain health</span>
+              </div>
+              <span class="macro-pct">20%</span>
+            </div>
+          </div>
+        </div>
+        <div class="macro-right" data-aos="fade-left">
+          <div class="donut-card">
+            <div class="donut-wrap">
+              <svg viewBox="0 0 200 200" class="donut-svg">
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#1e293b" stroke-width="28"/>
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#22d3ee" stroke-width="28" stroke-dasharray="150 352" stroke-dashoffset="88" stroke-linecap="round"/>
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#a78bfa" stroke-width="28" stroke-dasharray="250 352" stroke-dashoffset="-62" stroke-linecap="round"/>
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#fb923c" stroke-width="28" stroke-dasharray="100 352" stroke-dashoffset="-312" stroke-linecap="round"/>
+              </svg>
+              <div class="donut-center">
+                <span class="donut-kcal">2,100</span>
+                <span class="donut-lbl">kcal/day</span>
+              </div>
+            </div>
+            <div class="donut-legend">
+              <div class="legend-item"><span class="legend-dot" style="background:#22d3ee"></span>Protein 30%</div>
+              <div class="legend-item"><span class="legend-dot" style="background:#a78bfa"></span>Carbs 50%</div>
+              <div class="legend-item"><span class="legend-dot" style="background:#fb923c"></span>Fats 20%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="cta-section" id="cta">
+    <div class="section-container">
+      <div class="cta-card">
+        <div class="cta-glow"></div>
+        <span class="section-tag">Get Started</span>
+        <h2 class="cta-title">Ready to own your nutrition?</h2>
+        <p class="cta-subtitle">Join thousands of people already tracking smarter with bite.</p>
+        <div class="cta-buttons">
+          <a href="app.html" class="btn-primary btn-large" id="ctaAppBtn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Launch Web App
+          </a>
+          <a href="#" class="btn-outline btn-large" id="ctaPlayBtn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.5c.31.17.68.19 1.01.04l13-7.5-2.83-2.83L3.18 23.5zm16.63-10.38L17 11.5 3.18.5C2.85.35 2.48.37 2.18.54L15.99 14.35l1.82-.37 2-1.36zM2.18.54c-.18.1-.18.36 0 .46l15 8.66L14.34 11.5.5 13.5c-.08.01-.15.04-.21.08L2.18.54zM19.81 12.12l-2-1.36-1.82-.37L2.18 23.5c.31.17.68.19 1.01.04l16.62-9.59c.62-.36.62-1.27 0-1.83z"/></svg>
+            Google Play
+          </a>
+        </div>
+        <p class="cta-note">Free forever. No credit card needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">bite<span>.</span></a>
+        <p>Scan it. Log it. Own it.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <span class="footer-col-title">Product</span>
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How it Works</a>
+          <a href="#cta">Download</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Company</span>
+          <a href="#">About</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Legal</span>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 bite. — All rights reserved.</p>
+      <p>Made with 🖤 for people who give a damn about their health.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

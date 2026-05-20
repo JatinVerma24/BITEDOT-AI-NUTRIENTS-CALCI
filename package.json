@@ -1,0 +1,17 @@
+{
+  "name": "bitedot",
+  "version": "1.0.0",
+  "description": "Scan. Log. Own your nutrition.",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.4"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}
