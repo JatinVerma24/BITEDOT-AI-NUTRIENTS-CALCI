@@ -280,6 +280,30 @@
     <p>© 2026 bite. — Complete scan & track system.</p>
   </footer>
 
+  <!-- AI DIET COACH CHATBOT -->
+  <button id="aiChatFab" class="ai-chat-fab">
+    <span class="fab-icon">🤖</span> Coach
+  </button>
+
+  <div id="aiChatPanel" class="ai-chat-panel">
+    <div class="chat-header">
+      <div class="chat-title">
+        <span class="chat-status-dot"></span>
+        <h4>AI Diet Coach</h4>
+      </div>
+      <button id="closeChatBtn" class="btn-close-chat">&times;</button>
+    </div>
+    <div id="chatMessages" class="chat-messages">
+      <div class="msg msg-bot">
+        <div class="msg-bubble">Hi! I'm your AI Diet Coach. How can I help you reach your goals today?</div>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Ask about your diet..." autocomplete="off" />
+      <button id="sendChatBtn" class="btn-send-chat">➤</button>
+    </div>
+  </div>
+
   <!-- WebRTC and Scanner Code -->
   <script type="module" src="app.js"></script>
 </body>

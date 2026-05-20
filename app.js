@@ -638,4 +638,124 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     window.requestAnimationFrame(step);
   }
+
+  // ==========================================
+  // AI DIET COACH CHATBOT LOGIC
+  // ==========================================
+  const aiChatFab = document.getElementById('aiChatFab');
+  const aiChatPanel = document.getElementById('aiChatPanel');
+  const closeChatBtn = document.getElementById('closeChatBtn');
+  const sendChatBtn = document.getElementById('sendChatBtn');
+  const chatInput = document.getElementById('chatInput');
+  const chatMessages = document.getElementById('chatMessages');
+
+  let chatHistory = []; // to maintain context for Gemini
+
+  // Toggle Chat Drawer
+  if (aiChatFab && aiChatPanel && closeChatBtn) {
+    aiChatFab.addEventListener('click', () => {
+      aiChatPanel.classList.add('active');
+    });
+
+    closeChatBtn.addEventListener('click', () => {
+      aiChatPanel.classList.remove('active');
+    });
+  }
+
+  function addChatMessage(sender, text) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `msg msg-${sender}`;
+    msgDiv.innerHTML = `<div class="msg-bubble">${text}</div>`;
+    chatMessages.appendChild(msgDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function addTypingIndicator() {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `msg msg-bot typing-indicator-container`;
+    msgDiv.id = 'typingIndicator';
+    msgDiv.innerHTML = `
+      <div class="msg-bubble typing-indicator">
+        <span></span><span></span><span></span>
+      </div>
+    `;
+    chatMessages.appendChild(msgDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function removeTypingIndicator() {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator) {
+      indicator.remove();
+    }
+  }
+
+  async function handleSendChat() {
+    const userMsg = chatInput.value.trim();
+    if (!userMsg) return;
+
+    // Show user message
+    addChatMessage('user', userMsg);
+    chatInput.value = '';
+    
+    // Add context if history is empty
+    if (chatHistory.length === 0) {
+      const remainingCal = Math.max(0, GOALS.calories - localDiary.reduce((s, i) => s + i.cal, 0));
+      const todayFoods = localDiary.map(i => i.name).join(', ') || 'Nothing yet';
+      const systemContext = `You are an AI Diet Coach. The user's daily goal is ${GOALS.calories} kcal. Today they have eaten: ${todayFoods}. They have ${remainingCal} kcal remaining. Be encouraging, concise, and helpful. Answer in simple text.`;
+      
+      chatHistory.push({
+        role: 'user',
+        parts: [{ text: systemContext }]
+      });
+      chatHistory.push({
+        role: 'model',
+        parts: [{ text: 'Understood. I will help guide them.' }]
+      });
+    }
+
+    // Add actual user message to history
+    chatHistory.push({
+      role: 'user',
+      parts: [{ text: userMsg }]
+    });
+
+    addTypingIndicator();
+
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: chatHistory
+        })
+      });
+
+      if (!response.ok) throw new Error('API request failed');
+      const data = await response.json();
+      const botResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I'm having trouble thinking right now.";
+      
+      // Update history with bot response
+      chatHistory.push({
+        role: 'model',
+        parts: [{ text: botResponse }]
+      });
+
+      removeTypingIndicator();
+      addChatMessage('bot', botResponse.replace(/\*/g, '')); // remove markdown asterisks for simplicity
+
+    } catch (error) {
+      console.error('Chat error:', error);
+      removeTypingIndicator();
+      addChatMessage('bot', 'Network error. Please check your API key or connection.');
+    }
+  }
+
+  if (sendChatBtn && chatInput) {
+    sendChatBtn.addEventListener('click', handleSendChat);
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleSendChat();
+    });
+  }
+
 });
