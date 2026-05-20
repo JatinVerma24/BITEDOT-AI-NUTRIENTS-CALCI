@@ -909,3 +909,103 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* =========================================
+   MAGIC UI & ACETERNITY PREMIUM EFFECTS
+   ========================================= */
+
+/* 1. Aurora Background Mesh */
+.aurora-bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.15), transparent 30%),
+    radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1), transparent 40%);
+  z-index: -2;
+  animation: aurora-spin 20s linear infinite alternate;
+  filter: blur(60px);
+}
+
+.aurora-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 9, 17, 0.5); /* dark base */
+  backdrop-filter: blur(40px);
+  z-index: -1;
+}
+
+@keyframes aurora-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* 2. Glassmorphic App Panels */
+.app-panel {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* 3. MagicUI Border Beam (Animated Glowing Border for Scanner) */
+.camera-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.camera-container::before {
+  content: "";
+  position: absolute;
+  inset: -50px;
+  background: conic-gradient(
+    from 90deg at 50% 50%,
+    transparent 0%,
+    #3b82f6 10%,
+    transparent 30%,
+    transparent 100%
+  );
+  z-index: 0;
+  animation: border-beam 4s linear infinite;
+  opacity: 0.6;
+}
+
+.video-feed {
+  position: relative;
+  z-index: 2; /* keep video above the beam */
+}
+
+@keyframes border-beam {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 4. Bento Grid Enhancements */
+.progress-card {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+}
+
+.progress-card:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.results-card {
+  background: rgba(17, 24, 39, 0.8) !important;
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(59, 130, 246, 0.4) !important;
+}
