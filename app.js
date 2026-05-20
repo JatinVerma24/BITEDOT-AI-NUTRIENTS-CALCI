@@ -147,8 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const constraints = {
       video: {
         facingMode: activeFacingMode,
-        width: { ideal: 640 },
-        height: { ideal: 480 }
+        width: { ideal: 1280 },
+        height: { ideal: 720 }
       },
       audio: false
     };
@@ -167,9 +167,27 @@ document.addEventListener('DOMContentLoaded', () => {
         cameraStream.style.transform = 'scaleX(1)';
       }
     } catch (err) {
-      console.error("Camera access failed: ", err);
+      console.error('Camera access failed: ', err);
       cameraStream.style.display = 'none';
       cameraErrorBanner.style.display = 'flex';
+
+      // Show specific error message based on the error type
+      const errMsgEl = document.getElementById('cameraErrMsg');
+      if (errMsgEl) {
+        if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+          errMsgEl.innerHTML = `
+            <strong>Camera Permission Denied!</strong><br>
+            👉 Click the <strong>🔒 Lock icon</strong> in the URL bar above → Set Camera to <strong>"Allow"</strong> → Then press <strong>Retry</strong>.`;
+        } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
+          errMsgEl.innerHTML = `
+            <strong>Camera Already In Use!</strong><br>
+            👉 Close Zoom, Teams, or any other app using the camera → Then press <strong>Retry</strong>.`;
+        } else if (err.name === 'NotFoundError') {
+          errMsgEl.innerHTML = `<strong>No Camera Found!</strong><br>👉 Please connect a webcam to your PC.`;
+        } else {
+          errMsgEl.innerHTML = `<strong>Camera Error:</strong> ${err.name}. Please try again.`;
+        }
+      }
     }
   }
 
@@ -197,7 +215,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnRetryCamera.addEventListener('click', startCamera);
 
-  // Capture Image & Scan
+  // Auto-start camera when Scanner tab is active
+  startCamera();
+
   btnCaptureFrame.addEventListener('click', async () => {
     if (!currentStream) return;
 

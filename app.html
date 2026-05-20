@@ -160,12 +160,12 @@
 
           <!-- Permission / Offline Banner -->
           <div class="camera-error-banner" id="cameraErrorBanner" style="display: none;">
-            <div class="err-icon">🔒</div>
+            <div class="err-icon" id="cameraErrIcon">🔒</div>
             <div class="err-msg-block">
               <span class="err-msg">Camera Access Blocked</span>
-              <p class="err-sub">Browser settings or another app (like Zoom) is blocking the camera. Please allow camera access in the URL bar (lock icon) and try again.</p>
+              <p class="err-sub" id="cameraErrMsg">Browser settings or another app (like Zoom) is blocking the camera. Please allow camera access in the URL bar (lock icon) and try again.</p>
             </div>
-            <button class="btn-sec btn-sm mt-1" id="btnRetryCamera">Retry Camera</button>
+            <button class="btn-sec btn-sm mt-1" id="btnRetryCamera">🔄 Retry Camera</button>
           </div>
         </div>
 
