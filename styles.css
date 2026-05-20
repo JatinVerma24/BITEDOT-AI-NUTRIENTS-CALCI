@@ -1285,3 +1285,37 @@ body {
     text-align: center;
   }
 }
+
+/* =========================================
+   MAGIC UI & ACETERNITY PREMIUM EFFECTS
+   ========================================= */
+
+/* Aurora Background Mesh */
+.aurora-bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.15), transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.15), transparent 30%),
+    radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1), transparent 40%);
+  z-index: -2;
+  animation: aurora-spin 20s linear infinite alternate;
+  filter: blur(60px);
+}
+
+.aurora-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 9, 17, 0.5); /* dark base */
+  backdrop-filter: blur(40px);
+  z-index: -1;
+}
+
+@keyframes aurora-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}

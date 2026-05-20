@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
+  base: '/BITEDOT-AI-NUTRIENTS-CALCI/',
   build: {
     rollupOptions: {
       input: {
